@@ -15,8 +15,8 @@ public class ui {
         WikiService wikiService;
         Scanner scanner = new Scanner(System.in);
         int actividad;
-        int cacheType=0;
-        int tipoDeConsulta=0;
+        int cacheType = 0;
+        int tipoDeConsulta = 0;
         String consulta;
         boolean exit = false;
         while(!exit){
@@ -28,7 +28,7 @@ public class ui {
                     Tester tester = new Tester();
                     break;
                 case 2:
-                    while(cacheType<1 || cacheType>4){
+                    while(cacheType < 1 || cacheType > 4){
                         System.out.println("Seleccione el tipo de cache que desea utilizar");
                         System.out.println("\t\t1.RandomCache.\n\t\t2.LRUCache.\n\t\t3.FIFOCache.\n\t\t4.LIFOCache.");
                         cacheType = scanner.nextInt();
@@ -41,7 +41,7 @@ public class ui {
                         switch (tipoDeConsulta){
                             case 1:
                                 String title = null;
-                                while(title==null) {
+                                while(title == null) {
                                     System.out.println("Ingrese el título por el cual desea buscar:");
                                     title = scanner.next();
                                 }
@@ -49,11 +49,11 @@ public class ui {
                                 break;
                             case 2:
                                 int id = 0;
-                                while(id<1){
+                                while(id < 1){
                                     System.out.println("Ingrese el id por el cual desea buscar:");
                                     id = scanner.nextInt();
-                                    if(id<0){
-                                        System.out.println("Número invalido,ingrese un número mayor que 0.");
+                                    if(id < 0){
+                                        System.out.println("Número invalido, ingrese un número mayor que 0.");
                                     }
                                 }
                                 //wikiService.findById(id);

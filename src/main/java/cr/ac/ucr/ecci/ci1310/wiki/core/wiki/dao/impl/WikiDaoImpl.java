@@ -23,9 +23,11 @@ public class WikiDaoImpl implements WikiDao {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+            System.exit(2);
         }
 
     }
+
     @Override
     public WikiEntry findById(int id) {
         WikiEntry wikiEntry = null;
@@ -49,7 +51,7 @@ public class WikiDaoImpl implements WikiDao {
         ResultSet rs = null;
         try {
             Statement statement = connection.createStatement();
-            rs = statement.executeQuery("");
+            rs = statement.executeQuery("SELECT * FROM ");
         } catch (SQLException e) {
             e.printStackTrace();
         }

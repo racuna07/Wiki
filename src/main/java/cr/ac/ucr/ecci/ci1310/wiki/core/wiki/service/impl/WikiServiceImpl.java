@@ -41,6 +41,7 @@ public class WikiServiceImpl implements WikiService {
      public WikiServiceImpl(){
           this.usesCache = false;
      }
+
      @Override
      public WikiEntry findById(int id) {
           WikiEntry result= null;
