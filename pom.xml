@@ -16,6 +16,13 @@
             <version>1.0</version>
             <systemPath>${basedir}/repo/Cache-1.0.jar</systemPath>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.39</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

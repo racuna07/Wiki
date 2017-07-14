@@ -1,13 +1,11 @@
 package cr.ac.ucr.ecci.ci1310.wiki.core.wiki.service.impl;
 
-import cr.ac.ucr.ecci.ci1310.wiki.Cache;
-import cr.ac.ucr.ecci.ci1310.wiki.CacheImpl;
+import cr.ac.ucr.ecci.ci1310.cache.*;
 import cr.ac.ucr.ecci.ci1310.wiki.core.wiki.dao.WikiDao;
 import cr.ac.ucr.ecci.ci1310.wiki.core.wiki.dao.impl.WikiDaoImpl;
 import cr.ac.ucr.ecci.ci1310.wiki.core.wiki.service.WikiService;
 import cr.ac.ucr.ecci.ci1310.wiki.model.WikiEntry;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,20 +23,27 @@ public class WikiServiceImpl implements WikiService {
           this.usesCache = true;
           switch (cache){
                case 1:
+                    idCache = new RandomCache<Integer, WikiEntry>("idCache",100);
+                    titleCache = new RandomCache<String, List<WikiEntry>>("titleCache",100);
                     break;
                case 2:
+                    idCache = new LRUCache<Integer, WikiEntry>("idCache",100);
+                    titleCache = new LRUCache<String, List<WikiEntry>>("titleCache",100);
                     break;
                case 3:
+                    idCache = new FIFOCache<Integer, WikiEntry>("idCache",100);
+                    titleCache = new FIFOCache<String, List<WikiEntry>>("titleCache",100);
                     break;
                case 4:
+                    idCache = new LIFOCache<Integer, WikiEntry>("idCache",100);
+                    titleCache = new LIFOCache<String, List<WikiEntry>>("titleCache",100);
                     break;
-               default:
-                    idCache = new CacheImpl();
-                    titleCache = new CacheImpl();
+
           }
      }
 
      public WikiServiceImpl(){
+          this.wikiDao = new WikiDaoImpl();
           this.usesCache = false;
      }
 

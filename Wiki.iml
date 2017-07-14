@@ -12,6 +12,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
+      <library name="Cache-1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/Cache-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Cache-1.0" level="project" />
+    <orderEntry type="module-library">
       <library name="Maven: Cache-1.0:Cache-1.0:1.0">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/repo/Cache-1.0.jar!/" />
@@ -20,5 +30,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.39" level="project" />
   </component>
 </module>
