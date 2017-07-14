@@ -24,7 +24,6 @@ public class WikiDaoImpl implements WikiDao {
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(2);
-
         }
 
     }
@@ -36,7 +35,7 @@ public class WikiDaoImpl implements WikiDao {
         try {
             Statement statement = connection.createStatement();
             rs = statement.executeQuery("select p.page_id, p.page_title, convert(t.old_text using utf8) as text from page p, text t, revision r where p.page_id = "+id+ " and p.page_latest = r.rev_id and r.rev_text_id = t.old_id;");
-            if (rs.next() != false) {
+            if (rs.next()) {
                 rs.first();
                 wikiEntry = buildListResult(rs).get(0);
             }else {
@@ -55,7 +54,7 @@ public class WikiDaoImpl implements WikiDao {
         try {
             Statement statement = connection.createStatement();
             rs = statement.executeQuery("select p.page_id, p.page_title, convert(t.old_text using utf8) as text from page p, text t, revision r where p.page_title like '%"+title+"%' and p.page_latest = r.rev_id and r.rev_text_id = t.old_id;");
-            if (rs.next() != false) {
+            if (rs.next()) {
                 rs.first();
                 wikiEntryList = buildListResult(rs);
             }

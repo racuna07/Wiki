@@ -23,20 +23,20 @@ public class WikiServiceImpl implements WikiService {
           this.usesCache = true;
           switch (cache){
                case 1:
-                    idCache = new RandomCache<Integer, WikiEntry>("idCache",100);
-                    titleCache = new RandomCache<String, List<WikiEntry>>("titleCache",100);
+                    idCache = new RandomCache<>("idCache",100);
+                    titleCache = new RandomCache<>("titleCache",100);
                     break;
                case 2:
-                    idCache = new LRUCache<Integer, WikiEntry>("idCache",100);
-                    titleCache = new LRUCache<String, List<WikiEntry>>("titleCache",100);
+                    idCache = new LRUCache<>("idCache",100);
+                    titleCache = new LRUCache<>("titleCache",100);
                     break;
                case 3:
-                    idCache = new FIFOCache<Integer, WikiEntry>("idCache",100);
-                    titleCache = new FIFOCache<String, List<WikiEntry>>("titleCache",100);
+                    idCache = new FIFOCache<>("idCache",100);
+                    titleCache = new FIFOCache<>("titleCache",100);
                     break;
                case 4:
-                    idCache = new LIFOCache<Integer, WikiEntry>("idCache",100);
-                    titleCache = new LIFOCache<String, List<WikiEntry>>("titleCache",100);
+                    idCache = new LIFOCache<>("idCache",100);
+                    titleCache = new LIFOCache<>("titleCache",100);
                     break;
 
           }
