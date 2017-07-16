@@ -9,11 +9,11 @@ import javax.swing.JOptionPane;
  */
 public class Tester {
 
-    WikiService noCacheService;
-    WikiService randomService;
-    WikiService queueService;
-    WikiService stackService;
-    WikiService lruService;
+    private WikiService noCacheService;
+    private WikiService randomService;
+    private WikiService queueService;
+    private WikiService stackService;
+    private WikiService lruService;
 
     public Tester(){
         noCacheService = new WikiServiceImpl();
