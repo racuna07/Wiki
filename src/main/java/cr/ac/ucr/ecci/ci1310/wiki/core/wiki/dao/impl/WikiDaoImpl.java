@@ -10,12 +10,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by Rodrigo on 7/11/2017.
+ * Class implementation. Defines the Interface´s abstract methods.
  */
 public class WikiDaoImpl implements WikiDao {
 
-    private Connection connection;
+    private Connection connection; //A Connection object used to connect to the MySQL DBMS.
 
+    /**
+     * Class constructor.
+     */
     public WikiDaoImpl() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -28,6 +31,11 @@ public class WikiDaoImpl implements WikiDao {
 
     }
 
+    /**
+     * Searches for the WikiEntry corresponding to the id received as parameter.
+     * @param id WikiEntry id.
+     * @return Resulting WikiEntry
+     */
     @Override
     public WikiEntry findById(int id) {
         WikiEntry wikiEntry = null;
@@ -47,6 +55,11 @@ public class WikiDaoImpl implements WikiDao {
         return wikiEntry;
     }
 
+    /**
+     * Searches WikiEntries corresponding to the title received as parameter.
+     * @param title WikiEntry title.
+     * @return Resulting list of WikiEntries.
+     */
     @Override
     public List<WikiEntry> findByTitle(String title) {
         List<WikiEntry> wikiEntryList = null;
@@ -64,6 +77,11 @@ public class WikiDaoImpl implements WikiDao {
         return wikiEntryList;
     }
 
+    /**
+     * Returns a list of 1000 Id's currently present in the database.
+     * For debugging purposes.
+     * @return Array containing 1000 Id's present in the database.
+     */
     @Override
     public int[] getDataBaseIDs() {
         int[] result = new int[1000];
@@ -85,6 +103,11 @@ public class WikiDaoImpl implements WikiDao {
     }
 
 
+    /**
+     * @param rs: The set of tuples that satisfy the SQL previously query made.
+     * @return A list with the entry objects from the Result Set.
+     * @throws SQLException: If some error while interacting with the Result Set manifests.
+     */
     private List<WikiEntry> buildListResult(ResultSet rs) throws SQLException {
         LinkedList<WikiEntry> result = new LinkedList<>();
         do{

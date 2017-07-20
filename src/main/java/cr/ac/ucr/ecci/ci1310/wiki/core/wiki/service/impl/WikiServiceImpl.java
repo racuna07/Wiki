@@ -9,14 +9,18 @@ import cr.ac.ucr.ecci.ci1310.wiki.model.WikiEntry;
 import java.util.List;
 
 /**
- * Created by Rodrigo on 7/11/2017.
+ * Class implementation.
  */
 public class WikiServiceImpl implements WikiService {
-     private boolean usesCache;
-     private WikiDao wikiDao;
-     private Cache<Integer,WikiEntry> idCache;
-     private Cache<String,List<WikiEntry>> titleCache;
+     private boolean usesCache; //Whether the cache is going to be used or not.
+     private WikiDao wikiDao; //Wiki Dao object, who retrieves data from the database when needed.
+     private Cache<Integer,WikiEntry> idCache; //A cache associated with the IDs.
+     private Cache<String,List<WikiEntry>> titleCache; //A cache associated with the page´s bodies.
 
+     /**
+      * Class constructor.
+      * @param cache: Designates the cache to be used.
+      */
      public WikiServiceImpl(int cache){
           //Hardwired Dao
           this.wikiDao = new WikiDaoImpl();
@@ -42,11 +46,19 @@ public class WikiServiceImpl implements WikiService {
           }
      }
 
+     /**
+      * Class constructor. No cache used in this option.
+      */
      public WikiServiceImpl(){
           this.wikiDao = new WikiDaoImpl();
           this.usesCache = false;
      }
 
+     /**
+      * Searches for the WikiEntry corresponding to the id received as parameter.
+      * @param id WikiEntry id.
+      * @return Resulting WikiEntry
+      */
      @Override
      public WikiEntry findById(int id) {
           WikiEntry result= null;
@@ -63,6 +75,11 @@ public class WikiServiceImpl implements WikiService {
           return result;
      }
 
+     /**
+      * Searches WikiEntries corresponding to the title received as parameter.
+      * @param title WikiEntry title.
+      * @return Resulting list of WikiEntries.
+      */
      @Override
      public List<WikiEntry> findByTitle(String title) {
           List<WikiEntry> result = null;
@@ -78,6 +95,11 @@ public class WikiServiceImpl implements WikiService {
           return result;
      }
 
+     /**
+      * Returns a list of 1000 Id's currently present in the database.
+      * For debugging purposes.
+      * @return Array containing 1000 Id's present in the database.
+      */
      @Override
      public int[] getDataBaseIDs() {
           return wikiDao.getDataBaseIDs();

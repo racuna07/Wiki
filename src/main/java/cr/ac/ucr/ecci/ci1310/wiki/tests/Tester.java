@@ -2,20 +2,22 @@ package cr.ac.ucr.ecci.ci1310.wiki.tests;
 
 import cr.ac.ucr.ecci.ci1310.wiki.core.wiki.service.WikiService;
 import cr.ac.ucr.ecci.ci1310.wiki.core.wiki.service.impl.WikiServiceImpl;
-import javax.swing.JOptionPane;
 
 /**
- * Created by Rodrigo on 7/11/2017.
+ * A class in charge of testing and evaluating Cache´s performance.
  */
 public class Tester {
 
-    private WikiService noCacheService;
-    private WikiService randomService;
-    private WikiService queueService;
-    private WikiService stackService;
-    private WikiService lruService;
-    private String[] servicesNames;
+    private WikiService noCacheService; //A service that uses no cache
+    private WikiService randomService; //A service that uses a Random cache
+    private WikiService queueService; //A service that uses a Queue cache
+    private WikiService stackService; //A service that uses a Stack cache
+    private WikiService lruService; //A service that uses a "Last Recently Used" cache
+    private String[] servicesNames; //A vector of the names associated to each cache in order.
 
+    /**
+     * Class constructor.
+     */
     public Tester(){
         servicesNames = new String[] {"NoCache","RandomCache","FIFOCache","LIFOCache","LRUCache"};
         noCacheService = new WikiServiceImpl();
@@ -28,7 +30,14 @@ public class Tester {
     }
 
 
-
+    /**
+     * Principal testing method. Add uses random numbers to randomly select from a set of valid IDs
+     * in the database. Then it executes 1000 tests, sums the total time as well as the average
+     * comparison advantage of using each cache in comparison with the service that uses no cache,
+     * and displays both.
+     * @param pattern: Whether or not the test follows a pattern of IDs or it chooses all the IDs
+     *               randomly.
+     */
     public void test(boolean pattern){
         long[] times = new long[5];
         int[] randomNums = this.getRandomNumbers(1000,1000);
@@ -69,6 +78,13 @@ public class Tester {
         System.out.println("-----------------------------------------------------------------------------------------------------------");
     }
 
+    /**
+     * A method that measures the time taken for each service to perform a query, and then it saves
+     * them to an array.
+     * @param times: A time vector
+     * @param idNums: An array with the random values.
+     * @param j: The random value to be used from the array.
+     */
     private void updateTimes(long[] times, int[] idNums, int j){
         long t1 = System.nanoTime();
         noCacheService.findById(idNums[j]);
@@ -92,7 +108,13 @@ public class Tester {
         times[4] += t2-t1;
     }
 
-    private int[] getRandomNumbers(int n,int range){
+    /**
+     * A method that generates an array of pseudorandom integer values.
+     * @param n: Number of values to be generated.
+     * @param range: The range of the generated values.
+     * @return An array of random numbers.
+     */
+    private int[] getRandomNumbers(int n, int range){
         int[] numbers = new int[n];
         for (int i = 0; i < n; i++) {
             int number = (int) (Math.random()*n);
@@ -104,62 +126,5 @@ public class Tester {
 
     public static void main(String[] args) {
         Tester tester = new Tester();
-    }
-
-    //Pruebas de consultas individuales, no se utilizan.
-    public void idTest(){
-        System.out.println("----Starting id test----");
-        int a = Integer.parseInt( JOptionPane.showInputDialog("Please insert the desired page id") );
-        double result = this.idCalc(a);
-        System.out.println("Usage of cache imposed a time improvement of "+result+"%.");
-    }
-
-    public double titleCalc(String title){
-        lruService.findByTitle(title); //Result is now in the respective cache
-
-        long t1 = System.nanoTime();
-        noCacheService.findByTitle(title);
-        long t2 = System.nanoTime();
-
-        long ta = System.nanoTime();
-        lruService.findByTitle(title);
-        long tb = System.nanoTime();
-
-        t1 = t2 - t1;
-        ta = tb - ta;
-        return  ( (t1 - ta)/ t1)*100;
-    }
-
-    public void titleTest(){
-        System.out.println("----Starting title test----");
-        String title = JOptionPane.showInputDialog("Please insert the desired title to look for.");
-        double imp = this.titleCalc(title);
-        System.out.println("Usage of cache imposed a time improvement of "+imp+"%.");
-    }
-
-    public void randomIdTest(){
-        System.out.println("----Random Id test----");
-        long sum = 0;
-        int iterations = 100;
-        for (int i = 0; i < iterations; i++) {
-            int id = (int) (1000 * Math.random());
-            sum += this.idCalc(id);
-        }
-        System.out.println("Average time improvement upon cache usage is "+sum/iterations+"%.");
-    }
-    public double idCalc(int a){
-        lruService.findById(a); // Result should be now in the respective cache
-
-        long t1 = System.nanoTime();
-        noCacheService.findById(a);
-        long t2 = System.nanoTime();
-
-        long ta = System.nanoTime();
-        lruService.findById(a);
-        long tb = System.nanoTime();
-
-        t1 = t2 - t1;
-        ta = tb - ta;
-        return  ( (t1 - ta)/ t1)*100;
     }
 }

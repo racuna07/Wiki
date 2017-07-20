@@ -4,10 +4,8 @@ import cr.ac.ucr.ecci.ci1310.wiki.model.WikiEntry;
 
 import java.util.List;
 
-/**
- * Created by Rodrigo on 7/11/2017.
- */
 public interface WikiService {
+
     /**
      * Searches for the WikiEntry corresponding to the id received as parameter.
      * @param id WikiEntry id.

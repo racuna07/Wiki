@@ -1,6 +1,5 @@
 package cr.ac.ucr.ecci.ci1310.wiki.ui;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import cr.ac.ucr.ecci.ci1310.wiki.core.wiki.service.WikiService;
 import cr.ac.ucr.ecci.ci1310.wiki.core.wiki.service.impl.WikiServiceImpl;
 import cr.ac.ucr.ecci.ci1310.wiki.model.WikiEntry;
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Created by Rodrigo on 7/11/2017.
+ * A class that runs a user interface app for interacting and testing the data base.
  */
 public class ui {
     public static void main(String[] args){
