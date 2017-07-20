@@ -22,6 +22,13 @@ public interface WikiService {
      */
     List<WikiEntry> findByTitle(String title);
 
+    /**
+     * Returns a list of 1000 Id's currently present in the database.
+     * For debugging purposes.
+     * @return Array containing 1000 Id's present in the database.
+     */
+    int[] getDataBaseIDs();
+
 
 
 }

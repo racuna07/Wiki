@@ -77,4 +77,10 @@ public class WikiServiceImpl implements WikiService {
           }
           return result;
      }
+
+     @Override
+     public int[] getDataBaseIDs() {
+          return wikiDao.getDataBaseIDs();
+     }
+
 }

@@ -64,6 +64,26 @@ public class WikiDaoImpl implements WikiDao {
         return wikiEntryList;
     }
 
+    @Override
+    public int[] getDataBaseIDs() {
+        int[] result = new int[1000];
+        int i = 0;
+        ResultSet rs;
+        try {
+            Statement statement = connection.createStatement();
+            rs = statement.executeQuery("select page_id from page order by page_id limit 1000;");
+            rs.first();
+            do{
+                int pageId = rs.getInt("page_id");
+               result[i++] = pageId;
+            }while(rs.next());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
     private List<WikiEntry> buildListResult(ResultSet rs) throws SQLException {
         LinkedList<WikiEntry> result = new LinkedList<>();
